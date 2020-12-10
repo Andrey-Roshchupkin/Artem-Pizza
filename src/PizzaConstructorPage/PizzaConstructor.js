@@ -3,9 +3,9 @@ import { calculatePrice } from "../Shared/calculatePrice";
 import { useCollection } from "../Shared/useCollection";
 
 export const PizzaConstructor = ({ onPizzaCreated }) => {
-  const [pizzaSize, setpizzaSize] = useState("cm30");
-  const [doughType, setdoughType] = useState("puffy");
-  const [sauceType, setsauceType] = useState("tomato");
+  const [pizzaSize, setPizzaSize] = useState("cm30");
+  const [doughType, setDoughType] = useState("puffy");
+  const [sauceType, setSauceType] = useState("tomato");
   const [cheeseType, addCheese, removeCheese] = useCollection();
   const [vegetablesType, addVegetables, removeVegetables] = useCollection();
   const [meatType, addMeat, removeMeat] = useCollection();
@@ -20,15 +20,15 @@ export const PizzaConstructor = ({ onPizzaCreated }) => {
   });
 
   const updatePizzaSize = (event) => {
-    setpizzaSize(event.target.value);
+    setPizzaSize(event.target.value);
   };
 
   const updateDoughType = (event) => {
-    setdoughType(event.target.value);
+    setDoughType(event.target.value);
   };
 
   const updateSauceType = (event) => {
-    setsauceType(event.target.value);
+    setSauceType(event.target.value);
   };
   const updateCheeseType = (event) => {
     const { value, checked } = event.target;
