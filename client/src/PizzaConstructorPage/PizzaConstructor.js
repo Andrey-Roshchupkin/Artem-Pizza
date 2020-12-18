@@ -1,95 +1,47 @@
-import React, { useState } from "react";
+import React from "react";
 import { calculatePrice } from "../Shared/calculatePrice";
-import { useCollection } from "../Shared/useCollection";
+import { useForm } from "react-hook-form";
 
 export const PizzaConstructor = ({ onPizzaCreated }) => {
-  const [pizzaSize, setPizzaSize] = useState("cm30");
-  const [doughType, setDoughType] = useState("puffy");
-  const [sauceType, setSauceType] = useState("tomato");
-  const [cheeseType, addCheese, removeCheese] = useCollection();
-  const [vegetablesType, addVegetables, removeVegetables] = useCollection();
-  const [meatType, addMeat, removeMeat] = useCollection();
-
-  const price = calculatePrice({
-    pizzaSize,
-    doughType,
-    sauceType,
-    cheeseType,
-    vegetablesType,
-    meatType,
+  const { register, handleSubmit, watch } = useForm({
+    defaultValues: {
+pizzaSize: "cm30",
+    doughType: "puffy",
+    sauceType: "tomato",
+    cheeseType: [],
+    vegetablesType: [],
+    meatType: []
+    }
   });
 
-  const updatePizzaSize = (event) => {
-    setPizzaSize(event.target.value);
-  };
+  const values = watch();
 
-  const updateDoughType = (event) => {
-    setDoughType(event.target.value);
-  };
+  const price = calculatePrice(values);
 
-  const updateSauceType = (event) => {
-    setSauceType(event.target.value);
+  const onSubmit = (orderData) => {
+    onPizzaCreated(orderData);
   };
-  const updateCheeseType = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      addCheese(value);
-    } else {
-      removeCheese(value);
-    }
-  };
-
-  const updateVegetablesType = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      addVegetables(value);
-    } else {
-      removeVegetables(value);
-    }
-  };
-
-  const updateMeatType = (event) => {
-    const { value, checked } = event.target;
-    if (checked) {
-      addMeat(value);
-    } else {
-      removeMeat(value);
-    }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onPizzaCreated({
-      pizzaSize,
-      doughType,
-      sauceType,
-      cheeseType,
-      vegetablesType,
-      meatType,
-    });
-  };
-
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <legend>Выберите размер пиццы:</legend>
           <label>
             <input
+              ref={register}
               type="radio"
               value="cm30"
-              onChange={updatePizzaSize}
-              checked={pizzaSize === "cm30"}
+              name="pizzaSize"
             ></input>
             30 см
           </label>
           <label>
             <input
+              ref={register}
               type="radio"
               value="cm35"
-              onChange={updatePizzaSize}
-              checked={pizzaSize === "cm35"}
+              name="pizzaSize"
             ></input>
             35 см
           </label>
@@ -98,19 +50,19 @@ export const PizzaConstructor = ({ onPizzaCreated }) => {
           <legend>Выберите тип теста:</legend>
           <label>
             <input
+              ref={register}
               type="radio"
               value="puffy"
-              onChange={updateDoughType}
-              checked={doughType === "puffy"}
+              name="doughType"
             ></input>
             Пышное
           </label>
           <label>
             <input
+              ref={register}
               type="radio"
               value="thin"
-              onChange={updateDoughType}
-              checked={doughType === "thin"}
+              name="doughType"
             ></input>
             Тонкое
           </label>
@@ -119,28 +71,28 @@ export const PizzaConstructor = ({ onPizzaCreated }) => {
           <legend>Выберите тип соуса:</legend>
           <label>
             <input
+              ref={register}
               type="radio"
               value="tomato"
-              onChange={updateSauceType}
-              checked={sauceType === "tomato"}
+              name="sauceType"
             ></input>
             Томатный
           </label>
           <label>
             <input
+              ref={register}
               type="radio"
               value="white"
-              onChange={updateSauceType}
-              checked={sauceType === "white"}
+              name="sauceType"
             ></input>
             Белый
           </label>
           <label>
             <input
+              ref={register}
               type="radio"
               value="spicy"
-              onChange={updateSauceType}
-              checked={sauceType === "spicy"}
+              name="sauceType"
             ></input>
             Острый
           </label>
@@ -149,28 +101,28 @@ export const PizzaConstructor = ({ onPizzaCreated }) => {
           <legend>Добавьте сыр:</legend>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="mozarella"
-              onChange={updateCheeseType}
-              checked={cheeseType.includes("mozarella")}
+              name="cheeseType"
             ></input>
             Моцарелла
           </label>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="cheddar"
-              onChange={updateCheeseType}
-              checked={cheeseType.includes("cheddar")}
+              name="cheeseType"
             ></input>
             Чеддер
           </label>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="dorblue"
-              onChange={updateCheeseType}
-              checked={cheeseType.includes("dorblue")}
+              name="cheeseType"
             ></input>
             Дор блю
           </label>
@@ -179,28 +131,28 @@ export const PizzaConstructor = ({ onPizzaCreated }) => {
           <legend>Добавьте овощи:</legend>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="tomatoes"
-              onChange={updateVegetablesType}
-              checked={vegetablesType.includes("tomatoes")}
+              name="vegetablesType"
             ></input>
             Помидоры
           </label>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="mushrooms"
-              onChange={updateVegetablesType}
-              checked={vegetablesType.includes("mushrooms")}
+              name="vegetablesType"
             ></input>
             Грибы
           </label>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="peppers"
-              onChange={updateVegetablesType}
-              checked={vegetablesType.includes("peppers")}
+              name="vegetablesType"
             ></input>
             Перцы
           </label>
@@ -209,28 +161,28 @@ export const PizzaConstructor = ({ onPizzaCreated }) => {
           <legend>Добавьте мясо:</legend>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="bacon"
-              onChange={updateMeatType}
-              checked={meatType.includes("bacon")}
+              name="meatType"
             ></input>
             Бекон
           </label>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="pepperoni"
-              onChange={updateMeatType}
-              checked={meatType.includes("pepperoni")}
+              name="meatType"
             ></input>
             Пепперони
           </label>
           <label>
             <input
+              ref={register}
               type="checkbox"
               value="ham"
-              onChange={updateMeatType}
-              checked={meatType.includes("ham")}
+              name="meatType"
             ></input>
             Ветчина
           </label>
@@ -239,4 +191,4 @@ export const PizzaConstructor = ({ onPizzaCreated }) => {
       </form>
     </>
   );
-}
+};

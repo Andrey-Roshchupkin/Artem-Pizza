@@ -10,7 +10,7 @@ const schema = yup.object().shape({
     .required("Логин не может быть пустым!"),
   password: yup
     .string()
-    .min(8, "Слишком короткий парлоль")
+    .min(8, "Слишком короткий пароль")
     .required("Пароль не может быть пустым!"),
 });
 

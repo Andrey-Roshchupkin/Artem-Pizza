@@ -1,4 +1,5 @@
 const { render, fireEvent } = require("@testing-library/react");
+const { act } = require("react-test-renderer");
 const { PizzaConstructor } = require("./PizzaConstructor");
 
 describe("PizzaConstructor", () => {
@@ -36,7 +37,7 @@ describe("PizzaConstructor", () => {
   });
 
   describe("on pizza submit", () => {
-    it("passes constructed pizza", () => {
+    it("passes constructed pizza", async () => {
       const onPizzaSubmit = jest.fn();
 
       const { getByText } = render(
@@ -46,7 +47,10 @@ describe("PizzaConstructor", () => {
       fireEvent.click(getByText("Чеддер"));
       fireEvent.click(getByText("Бекон"));
       fireEvent.click(getByText("Грибы"));
-      fireEvent.click(getByText("Заказать за 287 руб"));
+
+      await act(async () => {
+        fireEvent.click(getByText("Заказать за 287 руб"));
+      });
 
       expect(onPizzaSubmit).toBeCalledWith({
         pizzaSize: "cm30",
