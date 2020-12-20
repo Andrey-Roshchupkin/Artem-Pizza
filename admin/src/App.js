@@ -1,13 +1,10 @@
-import { Route, Switch } from "react-router-dom";
+import { ProductCreationPage } from "./ProductCreationPage";
 
 function App() {
   return (
-    <Switch>
-      <Route exact path="/">
-        <ProductCreationPage />
-      </Route>
-      <Route path="login"></Route>
-    </Switch>
+    <>
+      <ProductCreationPage />
+    </>
   );
 }
 
