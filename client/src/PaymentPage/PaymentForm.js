@@ -1,18 +1,9 @@
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { calculatePrice } from "../Shared/calculatePrice";
-
-const normalizeCardNumber = (value) => {
-  return (
-    value
-      .replace(/\s/g, "")
-      .match(/.{1,4}/g)
-      ?.join(" ")
-      .substr(0, 19) || ""
-  );
-};
+import InputMask from "react-input-mask";
 
 export const PaymentForm = ({ pizza }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
@@ -22,18 +13,11 @@ export const PaymentForm = ({ pizza }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor="cardNumber">Номер карты: </label>
-        <input
-          placeholder="0000 0000 0000 0000"
-          type="tel"
-          inputMode="numeric"
-          autoComplete="cc-number"
+        <Controller
+          as={InputMask}
+          control={control}
+          mask="9999 9999 9999 9999"
           name="cardNumber"
-          id="cardNumber"
-          onChange={(event) => {
-            const { value } = event.target;
-            event.target.value = normalizeCardNumber(value);
-          }}
-          ref={register}
         />
       </div>
 
