@@ -5,13 +5,13 @@ import { useForm } from "react-hook-form";
 export const PizzaConstructor = ({ onPizzaCreated }) => {
   const { register, handleSubmit, watch } = useForm({
     defaultValues: {
-pizzaSize: "cm30",
-    doughType: "puffy",
-    sauceType: "tomato",
-    cheeseType: [],
-    vegetablesType: [],
-    meatType: []
-    }
+      pizzaSize: "cm30",
+      doughType: "puffy",
+      sauceType: "tomato",
+      cheeseType: [],
+      vegetablesType: [],
+      meatType: [],
+    },
   });
 
   const values = watch();
@@ -187,6 +187,7 @@ pizzaSize: "cm30",
             Ветчина
           </label>
         </fieldset>
+
         <button>Заказать за {price} руб</button>
       </form>
     </>

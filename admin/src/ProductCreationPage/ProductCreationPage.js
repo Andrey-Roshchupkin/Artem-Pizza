@@ -1,7 +1,23 @@
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+const schema = yup.object().shape({
+  price: yup
+    .number()
+    .transform((cv, ov) => (ov === "" ? undefined : cv))
+    .typeError("Цена должна быть числом")
+    .required("Цена обязательна к заполнению"),
+  name: yup.string().required("Имя обязательно к заполнению"),
+  slug: yup.string().required("Идентификатор обязателен к заполнению"),
+});
 
 export const ProductCreationPage = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, errors } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  console.log(errors);
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);

@@ -1,9 +1,16 @@
-import { DOUGH, SAUCES, SIZE, MEAT, CHEESE, VEGETABLES } from "../Shared/pizzaData";
-import {calculatePrice} from "../Shared/calculatePrice"
+import {
+  DOUGH,
+  SAUCES,
+  SIZE,
+  MEAT,
+  CHEESE,
+  VEGETABLES,
+} from "../Shared/pizzaData";
+import { calculatePrice } from "../Shared/calculatePrice";
 
 export const PizzaPreview = ({ pizza }) => {
   return (
-        <>
+    <>
       <p>Размер пиццы: {SIZE[pizza.pizzaSize].name}</p>
       <p>Тесто: {DOUGH[pizza.doughType].name}</p>
       <p>Соус: {SAUCES[pizza.sauceType].name}</p>
@@ -33,4 +40,3 @@ export const PizzaPreview = ({ pizza }) => {
     </>
   );
 };
-

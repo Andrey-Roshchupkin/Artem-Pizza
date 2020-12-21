@@ -1,13 +1,13 @@
-const { PizzaPreview } = require ("./PizzaPreview");
+const { PizzaPreview } = require("./PizzaPreview");
 import { render } from "@testing-library/react";
 
 describe("PizzaPreview", () => {
   it("renders correctly", () => {
     const { getByText } = render(
-      <PizzaPreview 
+      <PizzaPreview
         pizza={{
           doughType: "thin",
-          pizzaSize: "cm35",          
+          pizzaSize: "cm35",
           sauceType: "spicy",
           cheeseType: ["cheddar", "dorblue"],
           vegetablesType: ["peppers"],
@@ -15,11 +15,11 @@ describe("PizzaPreview", () => {
         }}
       />
     );
-    expect(getByText ("Тесто: тонкое")).toBeInTheDocument();
-    expect(getByText ("Соус: острый")).toBeInTheDocument();
-    expect(getByText ("Размер пиццы: 35 см")).toBeInTheDocument();
-    expect(getByText ("Сыр: чеддер, дор блю")).toBeInTheDocument();
-    expect(getByText ("Мясо: бекон, пепперони, ветчина")).toBeInTheDocument();
-    expect(getByText ("Овощи: перцы")).toBeInTheDocument();
+    expect(getByText("Тесто: тонкое")).toBeInTheDocument();
+    expect(getByText("Соус: острый")).toBeInTheDocument();
+    expect(getByText("Размер пиццы: 35 см")).toBeInTheDocument();
+    expect(getByText("Сыр: чеддер, дор блю")).toBeInTheDocument();
+    expect(getByText("Мясо: бекон, пепперони, ветчина")).toBeInTheDocument();
+    expect(getByText("Овощи: перцы")).toBeInTheDocument();
   });
 });
