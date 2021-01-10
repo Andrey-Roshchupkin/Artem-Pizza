@@ -3,6 +3,8 @@ import { calculatePrice } from "../Shared/calculatePrice";
 import InputMask from "react-input-mask";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { createNewOrder } from "../api";
+import { useHistory } from "react-router-dom";
 
 const schema = yup.object().shape({
   adress: yup.string().required("Введите адрес!"),
@@ -28,12 +30,15 @@ export const PaymentForm = ({ pizza }) => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-  };
+  const history = useHistory();
+
+  const onSubmit = handleSubmit(async (data) => {
+    await createNewOrder({ data, pizza });
+    history.push("/orders");
+  });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={onSubmit}>
       <div>
         <label htmlFor="adress">Адрес доставки</label>
         <input type="text" name="adress" ref={register} />
@@ -92,6 +97,7 @@ export const PaymentForm = ({ pizza }) => {
           onInput={(e) =>
             (e.target.value = ("" + e.target.value).toUpperCase())
           }
+          ref={register}
         />
       </div>
 

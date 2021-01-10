@@ -38,8 +38,21 @@ export const ProductCreationPage = () => {
         <input ref={register} id="slug" type="text" name="slug" />
       </div>
       <div>
-        <label htmlFor="picture">Изображение:</label>
-        <input ref={register} id="picture" type="file" name="picture" />{" "}
+        <label htmlFor="category">Категория ингридиентов:</label>
+        <select ref={register} id="category" name="category">
+          <option value="vegetables">овощи</option>
+          <option value="meet">мясо</option>
+          <option value="cheese">сыры</option>
+          <option value="sauces">соусы</option>
+        </select>
+      </div>
+      <div>
+        <label htmlFor="image">Изображение в превью:</label>
+        <input ref={register} id="image" type="file" name="image" />
+      </div>
+      <div>
+        <label htmlFor="thumbnail">Миниатюра для списка ингридиентов:</label>
+        <input ref={register} id="thumbnail" type="file" name="thumbnail" />
       </div>
       <button>Отправить</button>
     </form>

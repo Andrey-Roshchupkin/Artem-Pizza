@@ -26,7 +26,7 @@ function App() {
             <Link to="/login">Логин</Link>
           </li>
           <li>
-            <Link to="/orders-list">Заказы</Link>
+            <Link to="/orders">Заказы</Link>
           </li>
           <li>
             <Link to="/registration">Регистрация</Link>
@@ -53,7 +53,7 @@ function App() {
         <Route path="/receipt">
           <ReceiptPage />
         </Route>
-        <Route path="/orders-list">
+        <Route path="/orders">
           <OrderListPage />
         </Route>
         <Route>
