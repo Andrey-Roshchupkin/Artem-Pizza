@@ -1,9 +1,13 @@
-import { ProductCreationPage } from "./ProductCreationPage";
+import { CreationPage } from "./CreationPage";
+import { ListPage } from "./ListPage";
 
 function App() {
   return (
     <>
-      <ProductCreationPage />
+      <ListPage />
+      <hr />
+      <p>Добавить ингридиент:</p>
+      <CreationPage />
     </>
   );
 }

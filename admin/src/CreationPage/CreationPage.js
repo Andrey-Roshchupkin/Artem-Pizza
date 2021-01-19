@@ -12,15 +12,21 @@ const schema = yup.object().shape({
   slug: yup.string().required("Идентификатор обязателен к заполнению"),
 });
 
-export const ProductCreationPage = () => {
+export const CreationPage = () => {
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
   console.log(errors);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    await fetch("http://localhost:3000/ingredients", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
   });
 
   return (
@@ -54,7 +60,7 @@ export const ProductCreationPage = () => {
         <label htmlFor="thumbnail">Миниатюра для списка ингридиентов:</label>
         <input ref={register} id="thumbnail" type="file" name="thumbnail" />
       </div>
-      <button>Отправить</button>
+      <button>Добавить</button>
     </form>
   );
 };
