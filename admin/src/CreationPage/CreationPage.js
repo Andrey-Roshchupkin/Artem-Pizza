@@ -20,7 +20,7 @@ export const CreationPage = () => {
   console.log(errors);
 
   const onSubmit = handleSubmit(async (data) => {
-    await fetch("http://localhost:3000/ingredients", {
+    await fetch("http://localhost:8080/ingredients", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

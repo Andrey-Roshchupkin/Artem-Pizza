@@ -1,10 +1,10 @@
 import { useQuery } from "react-query";
+import { getIngredients } from "../api";
 
 export const ListPage = () => {
   const { isLoading, isError, data, error } = useQuery(
-    "ingridients",
-    async () =>
-      await fetch("http://localhost:3000/ingredients").then((res) => res.json())
+    `ingredients`,
+    async () => getIngredients
   );
 
   if (isLoading) {
@@ -12,9 +12,9 @@ export const ListPage = () => {
   }
 
   if (isError) {
-    return <>Ошибка: {error.message}</>;
+    return <>Ошибка: {JSON.stringify(error)}</>;
   }
-  
+
   return (
     <>
       <p>Список ингредиентов: </p>
