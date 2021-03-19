@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { createIngredient } from "../api";
+import { useContext } from "react";
+import { AuthContext } from "../AuthContext";
 
 const schema = yup.object().shape({
   price: yup
@@ -13,20 +16,13 @@ const schema = yup.object().shape({
 });
 
 export const CreationPage = () => {
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
+  const token = useContext(AuthContext);
 
-  console.log(errors);
-
-  const onSubmit = handleSubmit(async (data) => {
-    await fetch("http://localhost:8080/ingredients", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    });
+  const onSubmit = handleSubmit((data) => {
+        createIngredient({ data, ...token });
   });
 
   return (

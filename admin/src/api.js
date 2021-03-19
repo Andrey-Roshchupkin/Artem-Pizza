@@ -17,6 +17,19 @@ export const serverLogin = (data) => {
   });
 };
 
+export const createIngredient = ({ data, token }) => {
+  console.log(token);
+  console.log(data);
+  fetch("http://localhost:8080/ingredients", {
+    method: "POST",
+    body: data,
+    headers: {
+    "Content-type": `multipart/form-data`,
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((response) => response.json());
+};
+
 export const getIngredients = fetch(`${server}/ingredients`).then((res) =>
   res.json()
 );

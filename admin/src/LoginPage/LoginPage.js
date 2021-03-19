@@ -28,6 +28,7 @@ export const LoginPage = () => {
       console.log(error);
       alert("Ошибка авторизации. Попробуйте снова");
     }
+    
   };
 
   return (

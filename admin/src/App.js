@@ -4,6 +4,8 @@ import { EditPage } from "./EditPage/EditPage";
 import { ListPage } from "./ListPage";
 import { LoginPage } from "./LoginPage/LoginPage";
 
+
+
 function App() {
   return (
     <Switch>
@@ -19,7 +21,7 @@ function App() {
         <LoginPage />
       </Route>
       <Route exact path="/edit">
-         <EditPage/>
+        <EditPage />
       </Route>
     </Switch>
   );
