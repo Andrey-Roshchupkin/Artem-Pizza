@@ -16,6 +16,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "react-test-renderer": "^17.0.1",
+    "redux": "^4.0.5",
     "testing-library": "^0.0.2",
     "web-vitals": "^1.0.1",
     "yup": "^0.32.8"
