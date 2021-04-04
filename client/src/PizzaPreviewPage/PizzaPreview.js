@@ -14,7 +14,7 @@ export const PizzaPreview = ({ pizza }) => {
       <p>Размер пиццы: {SIZE[pizza.pizzaSize].name}</p>
       <p>Тесто: {DOUGH[pizza.doughType].name}</p>
       <p>Соус: {SAUCES[pizza.sauceType].name}</p>
-      {Boolean(pizza.cheeseType.length) && (
+      {!!(pizza.cheeseType) && (
         <p>
           Сыр:{" "}
           {pizza.cheeseType
@@ -22,7 +22,7 @@ export const PizzaPreview = ({ pizza }) => {
             .join(", ")}
         </p>
       )}
-      {Boolean(pizza.vegetablesType.length) && (
+      {!!(pizza.vegetablesType) && (
         <p>
           Овощи:{" "}
           {pizza.vegetablesType
@@ -30,7 +30,7 @@ export const PizzaPreview = ({ pizza }) => {
             .join(", ")}
         </p>
       )}
-      {Boolean(pizza.meatType.length) && (
+      {!!(pizza.meatType) && (
         <p>
           Мясо:{" "}
           {pizza.meatType.map((meatType) => MEAT[meatType].name).join(", ")}
