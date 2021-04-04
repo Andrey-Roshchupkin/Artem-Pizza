@@ -18,17 +18,23 @@ export const ListPage = () => {
   }
   const ingredients = data;
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    history.push("/edit");
+  const handleEdit = (id) => {
+    history.push(`/edit/${id}`);
+  };
+
+  const handleCreate = () => {
+    history.push("/create");
   };
 
   return (
     <>
+      <button onClick={handleCreate}>Добавить новый ингредиент</button>
+      <hr />
       <p>Список ингредиентов: </p>
       {ingredients.map((ingredients) => {
         return (
-          <form key={ingredients.id} onSubmit={handleSubmit}>
+          <div key={ingredients.id}>
+            <hr />
             <div>Наименование: {ingredients.name}</div>
             <div>Идентификатор: {ingredients.slug}</div>
             <div>Цена: {ingredients.price} руб.</div>
@@ -47,9 +53,10 @@ export const ListPage = () => {
                 alt="Миниатюра для списка ингридиентов"
               />
             </div>
-            <button>Редактировать</button>
-            <hr />
-          </form>
+            <button type="button" onClick={() => handleEdit(ingredients.id)}>
+              Редактировать
+            </button>
+          </div>
         );
       })}
     </>

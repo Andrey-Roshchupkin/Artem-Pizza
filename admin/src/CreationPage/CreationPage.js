@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { createIngredient } from "../api";
 import { useContext } from "react";
 import { AuthContext } from "../AuthContext";
+import { useHistory } from "react-router";
 
 const schema = yup.object().shape({
   price: yup
@@ -19,10 +20,14 @@ export const CreationPage = () => {
   const { register, handleSubmit } = useForm({
     resolver: yupResolver(schema),
   });
-  const token = useContext(AuthContext);
+
+  const history = useHistory();
+
+  const { token } = useContext(AuthContext);
 
   const onSubmit = handleSubmit((data) => {
-        createIngredient({ data, ...token });
+    createIngredient({ data, token });
+    history.push("/");
   });
 
   return (

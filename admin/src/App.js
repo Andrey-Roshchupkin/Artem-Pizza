@@ -4,23 +4,19 @@ import { EditPage } from "./EditPage/EditPage";
 import { ListPage } from "./ListPage";
 import { LoginPage } from "./LoginPage/LoginPage";
 
-
-
 function App() {
   return (
     <Switch>
       <Route exact path="/">
-        <>
-          <p>Добавить ингридиент:</p>
-          <CreationPage />
-          <hr />
-          <ListPage />
-        </>
+        <ListPage />
+      </Route>
+      <Route exact path="/create">
+        <CreationPage />
       </Route>
       <Route exact path="/login">
         <LoginPage />
       </Route>
-      <Route exact path="/edit">
+      <Route exact path="/edit/:id">
         <EditPage />
       </Route>
     </Switch>

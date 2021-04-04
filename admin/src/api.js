@@ -1,3 +1,5 @@
+import { createFormData } from "./utils";
+
 export const server = "http://localhost:8080";
 
 export const serverLogin = (data) => {
@@ -18,18 +20,41 @@ export const serverLogin = (data) => {
 };
 
 export const createIngredient = ({ data, token }) => {
-  console.log(token);
-  console.log(data);
-  fetch("http://localhost:8080/ingredients", {
+  const formData = createFormData(data);
+
+  fetch(`${server}/ingredients`, {
     method: "POST",
-    body: data,
+    body: formData,
     headers: {
-    "Content-type": `multipart/form-data`,
       Authorization: `Bearer ${token}`,
     },
-  }).then((response) => response.json());
+  }).then((res) => res.json());
 };
 
 export const getIngredients = fetch(`${server}/ingredients`).then((res) =>
   res.json()
 );
+
+export const getIngredient = (id) =>
+  fetch(`${server}/ingredients/${id}`).then((res) => res.json());
+
+export const deleteIngredient = ({ id, token }) => {
+  fetch(`${server}/ingredients/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => res.json());
+};
+
+export const editIngredient = ({ id, data, token }) => {
+  const formData = createFormData(data);
+
+  fetch(`${server}/ingredients/${id}`, {
+    method: "PUT",
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => res.json());
+};
